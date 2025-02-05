@@ -35,6 +35,10 @@ export const getProducts = async (req , res)=>{
 // Get a single product
 export const getProduct = async(req,res)=>{
     let {id} = req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(400).json({success: false, message: "Invalid product ID"})
+    }
     try {
         const product = await Product.findById(id)
         res.status(200).json({success: true, product})
@@ -68,6 +72,10 @@ export const updateProduct = async(req,res)=>{
 // Delete a product
 export const deleteProducts = async(req,res)=>{
     let {id} = req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(400).json({success: false, message: "Invalid product ID"})
+    }
 
     try {
         await Product.findByIdAndDelete(id)
