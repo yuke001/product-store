@@ -1,14 +1,16 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import productRouter from "./routes/productRoutes.js"
+import productRouter from "./routes/product.route.js"
+import connectDB from "./config/db.js";
 
 dotenv.config();
 
+connectDB();
 let app = express();
 
 app.use(express.json());
 
-app.use("/api", productRouter)
+app.use("/api/products", productRouter)
 
 
 
